@@ -1,3 +1,5 @@
+// src/context/ProgresoContext.jsx
+
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "../services/api";
 import { useUsuario } from "./UsuarioContext";
@@ -18,13 +20,27 @@ export const ProgresoProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
 
-  // 1. Cargar progreso desde el backend
+  // --- 1. Cargar progreso de la BD (o mock) ---
   const cargarProgreso = async () => {
-    if (!usuario) return;
+    if (!usuario) {
+      setLoading(false);
+      return;
+    }
 
     try {
-      const res = await api.get(`/progresos/${usuario.id}/`);
-      setProgreso(res.data);
+      /*
+        const res = await api.get(`/progresos/${usuario.id}/`);
+        setProgreso(res.data);
+      */
+
+      // --- DATOS TEMPORALES ---
+      setProgreso({
+        ahorro: 0,
+        inversion: 0,
+        presupuesto: 0,
+        seguridad: 0,
+      });
+
     } catch (error) {
       console.error("Error al obtener progreso:", error);
     } finally {
@@ -36,31 +52,28 @@ export const ProgresoProvider = ({ children }) => {
     cargarProgreso();
   }, [usuario]);
 
-  // 2. Actualizar progreso en BD
+  // --- 2. Actualizar un módulo ---
   const actualizarProgreso = async (modulo, valor) => {
-    try {
-      const nuevoProgreso = { ...progreso, [modulo]: valor };
-      setProgreso(nuevoProgreso);
+    const nuevo = { ...progreso, [modulo]: valor };
+    setProgreso(nuevo);
 
-      await api.patch(`/progresos/${usuario.id}/`, {
-        [modulo]: valor,
-      });
+    try {
+      /*
+        await api.patch(`/progresos/${usuario.id}/`, {
+          [modulo]: valor,
+        });
+      */
     } catch (error) {
       console.error("Error al actualizar progreso:", error);
     }
   };
-
-  // 3. Obtener progreso de un módulo
-  const obtenerProgreso = (modulo) => progreso[modulo] ?? 0;
 
   return (
     <ProgresoContext.Provider
       value={{
         progreso,
         loading,
-        cargarProgreso,
         actualizarProgreso,
-        obtenerProgreso,
       }}
     >
       {children}

@@ -4,6 +4,8 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/global.css'
 import { UsuarioProvider } from './context/UsuarioContext'
+import { MonedasProvider } from "./context/MonedasContext";
+import { ProgresoProvider } from "./context/ProgresoContext";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

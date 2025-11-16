@@ -1,67 +1,48 @@
-import { createContext, useState, useEffect } from "react";
-import axios from "../services/axiosConfig";
+// src/context/UsuarioContext.jsx
 
-// Crear el contexto
-export const UsuarioContext = createContext();
+import { createContext, useContext, useState, useEffect } from "react";
+import api from "../services/api";
 
-// Proveedor del contexto
-export function UsuarioProvider({ children }) {
+// Crear contexto
+const UsuarioContext = createContext();
+
+// Hook para usarlo
+export const useUsuario = () => useContext(UsuarioContext);
+
+export const UsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [cargando, setCargando] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  // Si hay token, cargar datos del usuario
+  // Cargar usuario desde localStorage
   useEffect(() => {
-    async function cargarUsuario() {
-      if (!token) {
-        setCargando(false);
-        return;
-      }
-      try {
-        const res = await axios.get("/usuario/", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setUsuario(res.data);
-      } catch (err) {
-        console.error("Error cargando usuario:", err);
-        cerrarSesion();
-      }
-      setCargando(false);
-    }
-    cargarUsuario();
-  }, [token]);
+    const stored = localStorage.getItem("usuario");
+    if (stored) setUsuario(JSON.parse(stored));
+    setLoading(false);
+  }, []);
 
-  // LOGIN
-  async function iniciarSesion(email, password) {
-    try {
-      const res = await axios.post("/token/", { email, password });
-      localStorage.setItem("token", res.data.access);
-      setToken(res.data.access);
-      return { ok: true };
-    } catch (error) {
-      return { ok: false, mensaje: "Credenciales incorrectas" };
-    }
-  }
+  const login = async (email, password) => {
+    /*
+      ⚠️ CUANDO BACKEND ESTÉ LISTO CAMBIAR POR:
 
-  // LOGOUT
-  function cerrarSesion() {
-    localStorage.removeItem("token");
-    setToken(null);
+      const res = await api.post("/auth/login/", { email, password });
+      setUsuario(res.data.user);
+      localStorage.setItem("usuario", JSON.stringify(res.data.user));
+    */
+
+    // Datos simulados
+    const fakeUser = { id: 1, nombre: "Sara", email };
+    setUsuario(fakeUser);
+    localStorage.setItem("usuario", JSON.stringify(fakeUser));
+  };
+
+  const logout = () => {
     setUsuario(null);
-  }
+    localStorage.removeItem("usuario");
+  };
 
   return (
-    <UsuarioContext.Provider
-      value={{
-        usuario,
-        token,
-        iniciando: cargando,
-        iniciarSesion,
-        cerrarSesion,
-        autenticado: !!usuario
-      }}
-    >
+    <UsuarioContext.Provider value={{ usuario, login, logout, loading }}>
       {children}
     </UsuarioContext.Provider>
   );
-}
+};

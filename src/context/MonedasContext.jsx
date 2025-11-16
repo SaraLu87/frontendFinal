@@ -1,25 +1,36 @@
+// src/context/MonedasContext.jsx
+
 import { createContext, useContext, useState, useEffect } from "react";
-import api from "../services/axiosConfig"; // nuestra instancia axios
+import api from "../services/api";
 import { useUsuario } from "./UsuarioContext";
 
-// Crear contexto
 const MonedasContext = createContext();
 
-// Hook para usar el contexto
 export const useMonedas = () => useContext(MonedasContext);
 
 export const MonedasProvider = ({ children }) => {
-  const { usuario } = useUsuario(); // obtenemos el usuario logueado
+  const { usuario } = useUsuario();
   const [monedas, setMonedas] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // 1. Obtener monedas desde backend
+  // --- 1. Cargar monedas ---
   const cargarMonedas = async () => {
-    if (!usuario) return;
+    if (!usuario) {
+      setLoading(false);
+      return;
+    }
 
     try {
-      const response = await api.get(`/usuarios/${usuario.id}/monedas/`);
-      setMonedas(response.data.monedas);
+      /*
+        CUANDO BACKEND ESTÉ LISTO:
+        const res = await api.get(`/usuarios/${usuario.id}/monedas/`);
+        setMonedas(res.data.monedas);
+      */
+
+      // --- MODO SIN BACKEND ---
+      const mock = 120;
+      setMonedas(mock);
+
     } catch (error) {
       console.error("Error al cargar monedas:", error);
     } finally {
@@ -27,38 +38,44 @@ export const MonedasProvider = ({ children }) => {
     }
   };
 
-  // 2. Ejecutar al iniciar sesión o actualizar usuario
   useEffect(() => {
     cargarMonedas();
   }, [usuario]);
 
-  // 3. Sumar monedas (y guardar)
+  // --- 2. Sumar monedas ---
   const ganarMonedas = async (cantidad) => {
-    try {
-      const nuevaCantidad = monedas + cantidad;
-      setMonedas(nuevaCantidad);
+    const nueva = monedas + cantidad;
+    setMonedas(nueva);
 
-      await api.patch(`/usuarios/${usuario.id}/monedas/`, {
-        monedas: nuevaCantidad,
-      });
-    } catch (error) {
-      console.error("Error al agregar monedas:", error);
+    try {
+      /*
+        await api.patch(`/usuarios/${usuario.id}/monedas/`, {
+          monedas: nueva,
+        });
+      */
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  //  4. Gastar monedas
+  // --- 3. Gastar monedas ---
   const gastarMonedas = async (cantidad) => {
-    if (monedas < cantidad) return alert("No tienes suficientes monedas");
+    if (monedas < cantidad) {
+      alert("No tienes suficientes monedas");
+      return;
+    }
+
+    const nueva = monedas - cantidad;
+    setMonedas(nueva);
 
     try {
-      const nuevaCantidad = monedas - cantidad;
-      setMonedas(nuevaCantidad);
-
-      await api.patch(`/usuarios/${usuario.id}/monedas/`, {
-        monedas: nuevaCantidad,
-      });
-    } catch (error) {
-      console.error("Error al gastar monedas:", error);
+      /*
+        await api.patch(`/usuarios/${usuario.id}/monedas/`, {
+          monedas: nueva,
+        });
+      */
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -67,9 +84,9 @@ export const MonedasProvider = ({ children }) => {
       value={{
         monedas,
         loading,
+        cargarMonedas,
         ganarMonedas,
         gastarMonedas,
-        cargarMonedas,
       }}
     >
       {children}

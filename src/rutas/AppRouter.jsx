@@ -33,7 +33,7 @@ const AppRouter = () => {
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/recuperar" element={<Recuperar />} />
+        <Route path="/recover" element={<Recover />} />
 
         {/* HOME */}
         <Route path="/" element={<Home />} />
