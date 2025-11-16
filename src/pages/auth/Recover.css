@@ -1,0 +1,79 @@
+/* src/pages/auth/recover.css */
+
+.recover-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2F7AD9, #52E36A);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.recover-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+  animation: fadeIn 0.5s ease;
+}
+
+.recover-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1C3A63;
+  margin-bottom: 10px;
+}
+
+.recover-subtitle {
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.recover-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2F7AD9;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+}
+
+.recover-btn:hover {
+  background-color: #1e57a5;
+}
+
+.recover-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.recover-footer a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.recover-success {
+  text-align: center;
+  color: #1C3A63;
+  background: #e0f7e9;
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

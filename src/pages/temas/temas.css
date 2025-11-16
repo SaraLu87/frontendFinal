@@ -1,0 +1,110 @@
+/* src/pages/temas/temas.css */
+
+/* ------------------------------------ */
+/* Contenedor general del layout     */
+/* ------------------------------------ */
+.tema-layout-container {
+  text-align: center;
+  padding: 50px 0;
+}
+
+/* ------------------------------------ */
+/* Título del tema                   */
+/* ------------------------------------ */
+.tema-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1C3A63; /* Azul oscuro */
+  margin-bottom: 10px;
+}
+
+/* ------------------------------------ */
+/* Subtítulo                         */
+/* ------------------------------------ */
+.tema-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+}
+
+/* ------------------------------------ */
+/* Contenedor de los tres círculos   */
+/* ------------------------------------ */
+.tema-circulos-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* ------------------------------------ */
+/* Círculo del reto (GENERAL)        */
+/* ------------------------------------ */
+.circulo-reto {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover efecto */
+.circulo-reto:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ------------------------------------ */
+/* Colores (según tema EduFinanzas)  */
+/* ------------------------------------ */
+
+/* Azul */
+.circulo-azul {
+  background-color: #2F7AD9;
+}
+
+/* Verde */
+.circulo-verde {
+  background-color: #3EBE62;
+}
+
+/* Morado */
+.circulo-morado {
+  background-color: #8A4FFF;
+}
+
+/* Amarillo */
+.circulo-amarillo {
+  background-color: #F7C948;
+}
+
+/* ------------------------------------ */
+/* Responsive                        */
+/* ------------------------------------ */
+
+@media (max-width: 768px) {
+  .circulo-reto {
+    width: 140px;
+    height: 140px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .circulo-reto {
+    width: 120px;
+    height: 120px;
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+}

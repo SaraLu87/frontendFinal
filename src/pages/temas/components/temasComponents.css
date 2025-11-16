@@ -1,0 +1,28 @@
+/* src/pages/temas/components/temasComponents.css */
+
+.circulo-reto {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.circulo-reto:hover {
+  transform: scale(1.08);
+}
+
+/* Colores */
+.circulo-azul { background: #2563eb; }
+.circulo-verde { background: #16a34a; }
+.circulo-morado { background: #7c3aed; }
+.circulo-amarillo { background: #facc15; }
+

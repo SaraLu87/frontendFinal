@@ -1,0 +1,48 @@
+/* src/components/footer.css */
+
+.footer {
+  background: linear-gradient(90deg, #2F7AD9, #52E36A);
+  color: white;
+  padding: 35px 0;
+  margin-top: 40px;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+}
+
+.footer-phrase {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.footer-sub {
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-line {
+  opacity: 0.3;
+}
+
+.footer-copy {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}

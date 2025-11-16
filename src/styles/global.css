@@ -1,0 +1,26 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tipografía global */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: #4f46e5 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+}
+
+/* Contenedores principales */
+.page-container {
+  padding: 40px 20px;
+}

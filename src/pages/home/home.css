@@ -1,0 +1,49 @@
+/* src/pages/home/home.css */
+
+.home-container {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* Secciones */
+.home-section {
+  margin-bottom: 50px;
+}
+
+.home-title {
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #1C3A63;
+}
+
+.home-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #475569;
+  max-width: 600px;
+  margin: 10px auto 0;
+}
+
+.home-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1C3A63;
+  margin-bottom: 25px;
+}
+
+/* Grids */
+.temas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+

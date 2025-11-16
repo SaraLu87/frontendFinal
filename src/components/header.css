@@ -1,0 +1,59 @@
+/* src/components/header.css */
+
+.header {
+  background: linear-gradient(90deg, #2F7AD9, #52E36A);
+  padding: 12px 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.header-brand {
+  cursor: pointer;
+  color: white !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-monedas {
+  background: #ffffff33;
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.header-usuario {
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.header-link {
+  color: white !important;
+  font-weight: 500;
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
+.header-logout {
+  color: white !important;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}

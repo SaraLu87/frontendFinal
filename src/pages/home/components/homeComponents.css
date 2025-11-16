@@ -1,0 +1,55 @@
+/* src/pages/home/components/homeComponents.css */
+
+.card-tema {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card-tema:hover {
+  transform: scale(1.04);
+}
+
+.card-tema-img {
+  height: 110px;
+  background: #e9eef5;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.card-tema h4 {
+  font-weight: 700;
+  color: #1C3A63;
+}
+
+.card-tema p {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+/* Tips */
+.card-tip {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card-tip-img {
+  height: 80px;
+  background: #e9eef5;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card-tip-text {
+  font-size: 1rem;
+  color: #1C3A63;
+  font-weight: 600;
+}
+
