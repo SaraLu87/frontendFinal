@@ -21,6 +21,7 @@ import PerfilUsuario from "../pages/perfil/PerfilUsuario";
 
 // Panel administrador
 import PerfilAdministrador from "../pages/perfil/PerfilAdministrador";
+import TemaCompletado from "../pages/temas/TemaCompletado.jsx";
 
 // 404
 import NotFound from "../pages/NotFound";
@@ -43,7 +44,8 @@ const AppRouter = () => {
         <Route path="/tema/:id/info" element={<TemaInfo />} />
         <Route path="/tema/:id/datos" element={<TemaDatos />} />
         <Route path="/tema/:id/preguntas" element={<TemaPreguntas />} />
-
+        <Route path="/tema/:id/completado" element={<TemaCompletado />} />
+        
         {/* PERFILES */}
         <Route path="/perfil" element={<PerfilUsuario />} />
         <Route path="/admin" element={<PerfilAdministrador />} />

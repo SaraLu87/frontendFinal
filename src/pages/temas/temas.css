@@ -108,3 +108,96 @@
     padding: 15px;
   }
 }
+
+
+/* _________________*/
+
+
+/* ----------- TEMA BLOQUEADO ----------- */
+
+.tema-bloqueado-card {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.tema-bloqueado-card h3 {
+  color: #d9534f;
+  font-weight: 800;
+}
+
+.btn-comprar {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #52E36A;
+  color: white;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-comprar:hover {
+  background: #3cc453;
+}
+
+.btn-volver-inicio {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #2F7AD9;
+  color: white;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-volver-inicio:hover {
+  background: #1c4d8c;
+}
+
+.pregunta-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+}
+
+.opciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.opcion-btn {
+  background: #e2e8f0;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.opcion-btn:hover {
+  background: #cbd5e1;
+}
+
+.opcion-btn.seleccionada {
+  background: #52E36A;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+

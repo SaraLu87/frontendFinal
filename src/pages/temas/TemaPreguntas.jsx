@@ -1,56 +1,140 @@
 // src/pages/temas/TemaPreguntas.jsx
-
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import axios from "../../services/api";
 
+import api from "../../services/api";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 
+import PreguntaCard from "./components/PreguntaCard";
+import { useProgreso } from "../../context/ProgresoContext";
+import { useMonedas } from "../../context/MonedasContext";
+
+import "./temas.css";
+
 const TemaPreguntas = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { ganarMonedas } = useMonedas();
+  const { actualizarProgreso } = useProgreso();
+
   const [preguntas, setPreguntas] = useState([]);
+  const [respondidas, setRespondidas] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
-  const [respuestaCorrecta, setRespuestaCorrecta] = useState(null);
-
+  // ================================
+  // 1. Cargar preguntas desde backend
+  // ================================
   useEffect(() => {
-    // 🔵 Cuando el backend esté listo, activar:
-    /*
-    axios.get(`/temas/${id}/preguntas/`)
-      .then(res => setPreguntas(res.data))
-      .catch(err => console.error(err));
-    */
+    const cargar = async () => {
+      try {
+        /*
+        const res = await api.get(`/temas/${id}/preguntas/`);
+        setPreguntas(res.data);
+        */
+        
+        // TEMPORAL SIN BACKEND -------------------------
+        setPreguntas([
+          {
+            id_reto: 1,
+            descripcion: "¿Qué es ahorrar?",
+            respuesta_uno: "Guardar dinero",
+            respuesta_dos: "Gastar todo",
+            respuesta_tres: "Pedir prestado",
+            respuesta_cuatro: "Comprar ropa",
+            respuestaCorrecta: "Guardar dinero",
+            recompensa_monedas: 60
+          },
+          {
+            id_reto: 2,
+            descripcion: "¿Cuál es un gasto necesario?",
+            respuesta_uno: "Comida",
+            respuesta_dos: "Ropa de marca",
+            respuesta_tres: "Videojuegos",
+            respuesta_cuatro: "Uber todos los días",
+            respuestaCorrecta: "Comida",
+            recompensa_monedas: 60
+          },
+          {
+            id_reto: 3,
+            descripcion: "¿Qué es una meta financiera?",
+            respuesta_uno: "Algo que quieres lograr con tu dinero",
+            respuesta_dos: "Gastar en fiestas",
+            respuesta_tres: "Comprar dulces",
+            respuesta_cuatro: "Salir siempre a comer",
+            respuestaCorrecta: "Algo que quieres lograr con tu dinero",
+            recompensa_monedas: 60
+          }
+        ]);
+        // ------------------------------------------------
+
+      } catch (error) {
+        console.error("Error cargando preguntas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    cargar();
   }, [id]);
 
-  const verificarRespuesta = (preguntaId, opcion) => {
-    setRespuestaSeleccionada(opcion);
 
-    // 🟢 Aquí luego enviamos la respuesta a la BD
-    /*
-    axios.post(`/progreso/responder/`, {
-        tema_id: id,
-        pregunta_id: preguntaId,
-        opcion
-    })
-    .then(res => setRespuestaCorrecta(res.data.correcta))
-    */
+  // =============================================
+  // 2. Enviar respuesta → guardar progreso en BD
+  // =============================================
+  const responderPregunta = async (idReto, opcion) => {
+    setRespondidas({
+      ...respondidas,
+      [idReto]: opcion
+    });
+
+    try {
+      /*
+      const res = await api.post("/progreso/responder/", {
+        id_reto: idReto,
+        respuesta: opcion,
+        id_tema: id
+      });
+      */
+
+      // TEMPORAL SIN BACKEND
+      const pregunta = preguntas.find((p) => p.id_reto === idReto);
+
+      if (pregunta.respuestaCorrecta === opcion) {
+        ganarMonedas(pregunta.recompensa_monedas);
+      }
+
+    } catch (error) {
+      console.error("Error guardando respuesta:", error);
+    }
+
+    // ¿Ya completó las 3 preguntas?
+    if (Object.keys(respondidas).length + 1 === preguntas.length) {
+      setTimeout(() => {
+        navigate(`/tema/${id}/completado`);
+      }, 1000);
+    }
   };
+
+
+  if (loading) return <p>Cargando...</p>;
 
   return (
     <>
       <Header />
 
-      <div style={{ padding: "40px 20px" }}>
-        <h1 style={{ color: "#8A4FFF", fontWeight: "700" }}>
-          Preguntas del Tema {id}
-        </h1>
+      <div className="tema-preguntas-container">
+        <h1 className="tema-title">Preguntas del Tema {id}</h1>
 
-        {preguntas.length === 0 && (
-          <p style={{ color: "#6b7280" }}>
-            Aquí se cargarán las preguntas desde la BD.
-          </p>
-        )}
+        {preguntas.map((pregunta) => (
+          <PreguntaCard
+            key={pregunta.id_reto}
+            pregunta={pregunta}
+            onResponder={responderPregunta}
+            respuestaSeleccionada={respondidas[pregunta.id_reto]}
+          />
+        ))}
       </div>
 
       <Footer />

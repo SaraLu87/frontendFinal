@@ -1,81 +1,56 @@
-// src/context/ProgresoContext.jsx
-
 import { createContext, useContext, useState, useEffect } from "react";
-import api from "../services/api";
-import { useUsuario } from "./UsuarioContext";
 
 const ProgresoContext = createContext();
-
 export const useProgreso = () => useContext(ProgresoContext);
 
 export const ProgresoProvider = ({ children }) => {
-  const { usuario } = useUsuario();
-
-  const [progreso, setProgreso] = useState({
-    ahorro: 0,
-    inversion: 0,
-    presupuesto: 0,
-    seguridad: 0,
+  
+  // Progreso guardado por tema:
+  // {
+  //   "1": { info: true, datos: false, preguntas: true }
+  // }
+  const [progresoTemas, setProgresoTemas] = useState(() => {
+    const guardado = localStorage.getItem("progresoTemas");
+    return guardado ? JSON.parse(guardado) : {};
   });
 
-  const [loading, setLoading] = useState(true);
-
-  // --- 1. Cargar progreso de la BD (o mock) ---
-  const cargarProgreso = async () => {
-    if (!usuario) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      /*
-        const res = await api.get(`/progresos/${usuario.id}/`);
-        setProgreso(res.data);
-      */
-
-      // --- DATOS TEMPORALES ---
-      setProgreso({
-        ahorro: 0,
-        inversion: 0,
-        presupuesto: 0,
-        seguridad: 0,
-      });
-
-    } catch (error) {
-      console.error("Error al obtener progreso:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Guardar en localStorage
   useEffect(() => {
-    cargarProgreso();
-  }, [usuario]);
+    localStorage.setItem("progresoTemas", JSON.stringify(progresoTemas));
+  }, [progresoTemas]);
 
-  // --- 2. Actualizar un módulo ---
-  const actualizarProgreso = async (modulo, valor) => {
-    const nuevo = { ...progreso, [modulo]: valor };
-    setProgreso(nuevo);
-
-    try {
-      /*
-        await api.patch(`/progresos/${usuario.id}/`, {
-          [modulo]: valor,
-        });
-      */
-    } catch (error) {
-      console.error("Error al actualizar progreso:", error);
-    }
+  
+  // ------------------------------------------
+  // 1. Marcar una sección como completada
+  // ------------------------------------------
+  const completarSeccion = (temaId, seccion) => {
+    setProgresoTemas(prev => ({
+      ...prev,
+      [temaId]: {
+        ...prev[temaId],
+        [seccion]: true,
+      }
+    }));
   };
+
+
+  // ------------------------------------------
+  // 2. Verificar si un tema ya está completado
+  // ------------------------------------------
+  const estaCompleto = (temaId) => {
+    const t = progresoTemas[temaId];
+    if (!t) return false;
+
+    return t.info && t.datos && t.preguntas;
+  };
+
 
   return (
-    <ProgresoContext.Provider
-      value={{
-        progreso,
-        loading,
-        actualizarProgreso,
-      }}
-    >
+    <ProgresoContext.Provider value={{
+      progresoTemas,
+      completarSeccion,
+      estaCompleto,
+    }}>
       {children}
     </ProgresoContext.Provider>
   );

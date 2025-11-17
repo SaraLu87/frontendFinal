@@ -2,47 +2,41 @@
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import axios from "../../services/api";
-
-import Header from "../../components/Header.jsx";
-import Footer from "../../components/Footer.jsx";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import TarjetaDato from "./components/TarjetaDato";
+import { useProgreso } from "../../context/ProgresoContext";
+import { TEMAS_CONFIG } from "../../constants/temas";
 
 const TemaDatos = () => {
   const { id } = useParams();
+  const { actualizarProgreso } = useProgreso();
   const [datos, setDatos] = useState([]);
 
+  const tema = TEMAS_CONFIG.find((t) => t.id === parseInt(id));
+
   useEffect(() => {
-    // Cuando el backend esté listo:
-    /*
-    axios.get(`/temas/${id}/datos/`)
-      .then(res => setDatos(res.data))
-      .catch(err => console.error(err));
-    */
+    actualizarProgreso(parseInt(id), "datos");
+
+    // mock de datos curiosos
+    setDatos([
+      { id: 1, texto: "Dato 1 importante relacionado con el tema." },
+      { id: 2, texto: "Dato 2 interesante." },
+      { id: 3, texto: "Dato 3 del tema correspondiente." },
+    ]);
   }, [id]);
 
   return (
     <>
       <Header />
 
-      <div style={{ padding: "40px 20px" }}>
-        <h1 style={{ color: "#52E36A", fontWeight: "700" }}>
-          Datos curiosos del Tema {id}
-        </h1>
+      <div className="contenido-tema">
+        <h1 className="titulo-seccion">{tema.nombre} - Datos curiosos</h1>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "20px",
-            marginTop: "30px"
-          }}
-        >
-          {/* CUADROS DINÁMICOS */}
-          {datos.length === 0 && (
-            <p style={{ color: "#6b7280" }}>
-              Aquí aparecerán datos curiosos desde la BD.
-            </p>
-          )}
+        <div className="tarjetas-container">
+          {datos.map((d) => (
+            <TarjetaDato key={d.id} texto={d.texto} />
+          ))}
         </div>
       </div>
 
