@@ -6,13 +6,16 @@ import './styles/global.css'
 import { UsuarioProvider } from './context/UsuarioContext'
 import { MonedasProvider } from "./context/MonedasContext";
 import { ProgresoProvider } from "./context/ProgresoContext";
+import { TemaProvider } from "./context/TemasContext";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UsuarioProvider>
       <MonedasProvider>
         <ProgresoProvider>
-          <App />
+          <TemaProvider>
+            <App />
+          </TemaProvider>
         </ProgresoProvider>
       </MonedasProvider>
     </UsuarioProvider>

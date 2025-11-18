@@ -5,6 +5,7 @@
 
 import { Navigate } from "react-router-dom";
 import { useUsuario } from "../context/UsuarioContext";
+import { useTemas } from "../context/TemasContext";
 
 const AdminRoute = ({ children }) => {
   const { usuario } = useUsuario();

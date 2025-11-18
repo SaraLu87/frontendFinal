@@ -14,6 +14,7 @@ import TemaDatos from "../pages/temas/TemaDatos";
 import TemaPreguntas from "../pages/temas/TemaPreguntas";
 import TemaCompletado from "../pages/temas/TemaCompletado";
 import HomeTemas from "../pages/home/HomeTemas";
+import { useTemas } from "../context/TemasContext";
 
 
 
@@ -38,14 +39,14 @@ const AppRouter = () => {
         {/* RUTAS PRIVADAS */}
         <Route path="/" element={<PrivateRoute><HomeTemas /></PrivateRoute>} />
 
-        <Route
+        {/* <Route
           path="/"
           element={
             <PrivateRoute>
               <Home />
             </PrivateRoute>
           }
-        />
+        /> */}
 
         <Route
           path="/tema/:id"
