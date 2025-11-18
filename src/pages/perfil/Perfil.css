@@ -1,0 +1,248 @@
+/* src/pages/perfil/Perfil.css */
+
+/* Variables de Color (basadas en home.css y Perfil.jsx original) */
+:root {
+  --color-primary: #4f46e5;      /* Botones, Barras de progreso, Badge */
+  --color-secondary-dark: #3730a3; /* Títulos grandes */
+  --color-text-dark: #1C3A63;    /* Títulos de secciones */
+  --color-text-medium: #6b7280;
+  --color-background-page: #f3f4f6;
+  --color-background-card: #ffffff;
+  --color-monedas-bg: #fef3c7;   /* Amarillo claro para monedas */
+  --color-monedas-text: #92400e;  /* Marrón oscuro para monedas */
+}
+
+/* Contenedor principal de la página (Similar a home-container) */
+.perfil-page-container {
+  min-height: 100vh;
+  background-color: var(--color-background-page);
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+/* Estilos de Títulos */
+.perfil-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-secondary-dark);
+  margin: 0;
+}
+
+.perfil-section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-secondary-dark);
+  margin-bottom: 25px;
+}
+
+/* Estilos de Tarjetas (Cards) */
+.perfil-card {
+  border-radius: 20px;
+  border: none;
+  padding: 30px;
+  background-color: var(--color-background-card);
+}
+.perfil-card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
+
+
+/* --- Botones de Edición --- */
+.perfil-button {
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: none;
+}
+
+.perfil-button-edit {
+  background-color: var(--color-primary) !important;
+}
+
+.perfil-button-save {
+  background-color: #10b981 !important; /* Verde de éxito */
+}
+
+.perfil-button-cancel {
+  /* Estilo por defecto de outline-secondary ya es bueno */
+  color: var(--color-text-medium) !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* --- Foto de Perfil --- */
+.perfil-foto-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.perfil-foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-primary);
+}
+
+.perfil-foto-upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+.perfil-foto-upload-btn span {
+    font-size: 1.2rem;
+}
+
+.perfil-name-display {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-secondary-dark);
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.perfil-email-display {
+  color: var(--color-text-medium);
+  margin-bottom: 20px;
+}
+
+/* --- Monedas --- */
+.perfil-monedas-box {
+  background-color: var(--color-monedas-bg);
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.perfil-monedas-icon {
+  font-size: 2rem;
+}
+
+.perfil-monedas-info {
+    text-align: left;
+}
+
+.perfil-monedas-count {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-monedas-text);
+  line-height: 1; /* Ajuste para el espacio */
+}
+
+.perfil-monedas-label {
+  font-size: 0.9rem;
+  color: var(--color-monedas-text);
+}
+
+/* --- Estadísticas --- */
+.perfil-stat-item {
+  text-align: center;
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 15px;
+}
+.perfil-stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+.perfil-stat-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-secondary-dark);
+}
+.perfil-stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-medium);
+}
+
+/* --- Formulario y Datos Personales --- */
+.perfil-form-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.perfil-form-control {
+  border-radius: 10px;
+  padding: 10px 15px;
+  border: 1.5px solid #cbd5e1;
+}
+
+.perfil-dato-display {
+  color: var(--color-text-medium);
+  margin-top: 8px; /* Espaciado para que se alinee con los inputs */
+}
+
+/* --- Metas y Progreso --- */
+.perfil-progreso-general-header {
+    font-weight: 600;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.perfil-progreso-badge {
+  background-color: var(--color-primary) !important;
+  font-size: 1rem;
+  padding: 5px 12px;
+}
+
+.perfil-progress-bar {
+  height: 12px;
+  border-radius: 10px;
+}
+.perfil-progress-bar-small {
+    height: 8px;
+    border-radius: 10px;
+}
+
+
+/* Elementos individuales de lección */
+.perfil-leccion-item {
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.perfil-leccion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.perfil-leccion-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.perfil-leccion-icon {
+    font-size: 1.2rem;
+}
+
+.perfil-leccion-nombre {
+    font-weight: 600;
+    color: var(--color-secondary-dark);
+}
+
+.perfil-leccion-porcentaje {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+}
