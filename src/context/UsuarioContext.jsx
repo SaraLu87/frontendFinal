@@ -32,26 +32,17 @@ export const UsuarioProvider = ({ children }) => {
 
   const login = async (correo, contrasena) => {
     try {
-      /*
-      // CUANDO ESTE LISTO EL BACKEND:
+      // Llamada real al backend
+      const res = await api.post("/login_usuario/", { correo, contrasena });
 
-      const res = await api.post("/login/", { correo, contrasena });
+      // Guardar token en localStorage
+      localStorage.setItem("token", res.data.token);
 
+      // Guardar usuario en estado global
       setUsuario(res.data.usuario);
 
       return { ok: true };
-      */
-
-      // --------- MODO MOCK PARA PRUEBAS SIN BACKEND ---------
-      setUsuario({
-        id_usuario: 1,
-        correo,
-        nombre_perfil: "Usuario Demo",
-        monedas: 250,
-      });
-
-      return { ok: true };
-
+      
     } catch (error) {
       console.error("Error en login:", error);
       return { ok: false, mensaje: "Credenciales incorrectas" };
