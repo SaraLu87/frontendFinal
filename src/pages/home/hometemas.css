@@ -1,0 +1,99 @@
+/* 📌 src/pages/home/homeTemas.css */
+
+.home-temas-container {
+  padding: 40px 20px;
+}
+
+.home-title {
+  text-align: center;
+  color: #2F7AD9;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.temas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 25px;
+}
+
+.tema-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  position: relative;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.tema-card:hover {
+  transform: translateY(-5px);
+}
+
+.tema-card h2 {
+  color: #2F7AD9;
+  font-weight: 700;
+}
+
+.descripcion {
+  margin-top: 10px;
+  color: #475569;
+}
+
+.estado {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.estado.disponible {
+  color: #16a34a;
+}
+
+.estado.bloqueado {
+  color: #dc2626;
+}
+
+.estado.completado {
+  color: #0ea5e9;
+}
+
+.precio {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.btn-entrar {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: #2F7AD9;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-entrar:disabled {
+  background: #94a3b8;
+}
+
+.btn-entrar:hover:not(:disabled) {
+  background: #1d5fb8;
+}
+
+/* Estado visual */
+.tema-card.bloqueado {
+  opacity: 0.6;
+}
+
+.tema-card.completado {
+  border: 2px solid #0ea5e9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,8 +1,8 @@
-/* src/components/header.css */
+/* src/styles/header.css */
 
 .header {
   background: linear-gradient(90deg, #2F7AD9, #52E36A);
-  padding: 12px 0;
+  padding: 10px 0;
   box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
@@ -10,7 +10,6 @@
   cursor: pointer;
   color: white !important;
   font-weight: 700;
-  letter-spacing: 1px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -30,7 +29,7 @@
 
 .header-monedas {
   background: #ffffff33;
-  padding: 8px 15px;
+  padding: 7px 15px;
   border-radius: 20px;
   color: white;
   font-weight: 600;
@@ -39,7 +38,6 @@
 .header-usuario {
   color: white;
   font-weight: 600;
-  font-size: 0.95rem;
 }
 
 .header-link {

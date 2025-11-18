@@ -1,21 +1,45 @@
-// src/pages/temas/TemaInfo.jsx
-
+// 📌 src/pages/temas/TemaInfo.jsx
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+
 import { useProgreso } from "../../context/ProgresoContext";
-import { TEMAS_CONFIG } from "../../constants/temas";
+import api from "../../services/api";
+
+import TarjetaInfo from "./components/TarjetaInfo";
 
 const TemaInfo = () => {
   const { id } = useParams();
   const { actualizarProgreso } = useProgreso();
 
-  const tema = TEMAS_CONFIG.find((t) => t.id === parseInt(id));
+  const [info, setInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // registrar que entró a la sección info
     actualizarProgreso(parseInt(id), "info");
+
+    const loadInfo = async () => {
+      try {
+        // ⚠️ CAMBIAR CUANDO TENGAS ENDPOINT REAL:
+        const res = await api.get("/retos/");
+
+        const descripcion = res.data.find(
+          (item) =>
+            item.id_tema === parseInt(id) &&
+            item.tipo_pregunta === "descripcion"
+        );
+
+        setInfo(descripcion || null);
+      } catch (e) {
+        console.error("Error cargando información:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadInfo();
   }, [id]);
 
   return (
@@ -23,20 +47,20 @@ const TemaInfo = () => {
       <Header />
 
       <div className="contenido-tema">
-        <h1 className="titulo-seccion">{tema.nombre} - Información</h1>
+        <h1 className="titulo-seccion">Lo que debes saber</h1>
 
-        <div className="bloque-info">
-          <p>
-            Aquí aparecerá la información oficial del tema desde backend cuando
-            esté listo.
-          </p>
+        {loading && <p>Cargando información...</p>}
 
-          <ul>
-            <li>Concepto principal del tema.</li>
-            <li>Ejemplos de la vida real.</li>
-            <li>Explicación clara del contenido.</li>
-          </ul>
-        </div>
+        {!loading && !info && (
+          <p>No hay información registrada para este tema.</p>
+        )}
+
+        {!loading && info && (
+          <TarjetaInfo
+            titulo={info.nombre_reto}
+            descripcion={info.descripcion}
+          />
+        )}
       </div>
 
       <Footer />

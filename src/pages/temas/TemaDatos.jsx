@@ -4,26 +4,31 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import api from "../../services/api";
 import TarjetaDato from "./components/TarjetaDato";
-import { useProgreso } from "../../context/ProgresoContext";
-import { TEMAS_CONFIG } from "../../constants/temas";
 
 const TemaDatos = () => {
   const { id } = useParams();
-  const { actualizarProgreso } = useProgreso();
   const [datos, setDatos] = useState([]);
 
-  const tema = TEMAS_CONFIG.find((t) => t.id === parseInt(id));
-
   useEffect(() => {
-    actualizarProgreso(parseInt(id), "datos");
+    const fetchDatos = async () => {
+      try {
+        const res = await api.get("/retos/");
 
-    // mock de datos curiosos
-    setDatos([
-      { id: 1, texto: "Dato 1 importante relacionado con el tema." },
-      { id: 2, texto: "Dato 2 interesante." },
-      { id: 3, texto: "Dato 3 del tema correspondiente." },
-    ]);
+        const filtrados = res.data.filter(
+          (r) =>
+            r.id_tema === parseInt(id) &&
+            r.tipo_pregunta === "datos"
+        );
+
+        setDatos(filtrados);
+      } catch (e) {
+        console.error("Error cargando datos:", e);
+      }
+    };
+
+    fetchDatos();
   }, [id]);
 
   return (
@@ -31,11 +36,11 @@ const TemaDatos = () => {
       <Header />
 
       <div className="contenido-tema">
-        <h1 className="titulo-seccion">{tema.nombre} - Datos curiosos</h1>
+        <h1 className="titulo-seccion">Datos curiosos</h1>
 
-        <div className="tarjetas-container">
+        <div className="lista-datos">
           {datos.map((d) => (
-            <TarjetaDato key={d.id} texto={d.texto} />
+            <TarjetaDato key={d.id_reto} texto={d.descripcion} />
           ))}
         </div>
       </div>

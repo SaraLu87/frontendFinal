@@ -1,11 +1,16 @@
 // src/pages/temas/components/TarjetaDato.jsx
-import "../temas.css";
+// Tarjeta gamificada para Datos Curiosos
 
-const TarjetaDato = ({ titulo, descripcion }) => {
+import "./temasComponents.css";
+
+const TarjetaDato = ({ texto }) => {
   return (
-    <div className="tarjeta-dato">
-      <h4>{titulo}</h4>
-      <p>{descripcion}</p>
+    <div className="tarjeta-dato-gamificada animate-pop">
+      <div className="tarjeta-icono">💡</div>
+
+      <p className="tarjeta-texto">{texto}</p>
+
+      <div className="tarjeta-brillo"></div>
     </div>
   );
 };

@@ -1,47 +1,99 @@
 // src/context/UsuarioContext.jsx
 
-import { createContext, useContext, useState, useEffect } from "react";
-import api from "../services/api";
+//  CONTEXTO DE USUARIO
+//  Maneja login, logout y no borra datos al cerrar sesión
 
-// Crear contexto
+import { createContext, useContext, useState, useEffect } from "react";
+import api from "../services/api"; //  Cuando el backend esté listo
+
 const UsuarioContext = createContext();
 
-// Hook para usarlo
+// Hook para usar el contexto
 export const useUsuario = () => useContext(UsuarioContext);
 
 export const UsuarioProvider = ({ children }) => {
-  const [usuario, setUsuario] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  // Cargar usuario desde localStorage
+  // 1. ESTADO GLOBAL DEL USUARIO
+  const [usuario, setUsuario] = useState(() => {
+    const guardado = localStorage.getItem("usuario");
+    return guardado ? JSON.parse(guardado) : null;
+  });
+
+  // 2. GUARDAR USUARIO EN LOCALSTORAGE AL CAMBIAR
+  
   useEffect(() => {
-    const stored = localStorage.getItem("usuario");
-    if (stored) setUsuario(JSON.parse(stored));
-    setLoading(false);
-  }, []);
+    if (usuario) {
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+    }
+  }, [usuario]);
 
-  const login = async (email, password) => {
-    /*
-      ⚠️ CUANDO BACKEND ESTÉ LISTO CAMBIAR POR:
 
-      const res = await api.post("/auth/login/", { email, password });
-      setUsuario(res.data.user);
-      localStorage.setItem("usuario", JSON.stringify(res.data.user));
-    */
+  // 3. LOGIN (con backend)
 
-    // Datos simulados
-    const fakeUser = { id: 1, nombre: "Sara", email };
-    setUsuario(fakeUser);
-    localStorage.setItem("usuario", JSON.stringify(fakeUser));
+  const login = async (correo, contrasena) => {
+    try {
+      /*
+      // CUANDO ESTE LISTO EL BACKEND:
+
+      const res = await api.post("/login/", { correo, contrasena });
+
+      setUsuario(res.data.usuario);
+
+      return { ok: true };
+      */
+
+      // --------- MODO MOCK PARA PRUEBAS SIN BACKEND ---------
+      setUsuario({
+        id_usuario: 1,
+        correo,
+        nombre_perfil: "Usuario Demo",
+        monedas: 250,
+      });
+
+      return { ok: true };
+
+    } catch (error) {
+      console.error("Error en login:", error);
+      return { ok: false, mensaje: "Credenciales incorrectas" };
+    }
   };
 
+
+  // 4. LOGOUT
   const logout = () => {
     setUsuario(null);
     localStorage.removeItem("usuario");
   };
 
+
+  // 5. REGISTER (al conectar backend)
+  const register = async (datos) => {
+    try {
+      /*
+      const res = await api.post("/register/", datos);
+      setUsuario(res.data.usuario);
+      */
+
+      return { ok: true };
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      return { ok: false, mensaje: "No se pudo registrar" };
+    }
+  };
+
+
+
+  // 6. VALORES DISPONIBLES PARA TODA LA APP
   return (
-    <UsuarioContext.Provider value={{ usuario, login, logout, loading }}>
+    <UsuarioContext.Provider
+      value={{
+        usuario,
+        login,
+        logout,
+        register,
+        setUsuario,
+      }}
+    >
       {children}
     </UsuarioContext.Provider>
   );

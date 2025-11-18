@@ -1,72 +1,89 @@
 // src/components/Header.jsx
+
+//  HEADER PARA TODA LA APP
+//  logo, nombre, monedas y logout
+
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { useUsuario } from "../context/UsuarioContext";
 import { useMonedas } from "../context/MonedasContext";
-import logo from "../assets/logo.png";
-import "./header.css";
+
+import logo from "../assets/logo.png"; //  Imagen viene del backend luego
+
+import "../components/header.css";
 
 const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { usuario, logout } = useUsuario();
   const { monedas } = useMonedas();
 
-  // Ocultar Header en las páginas de auth
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname === "/recuperar"
-  ) {
-    return null;
-  }
-
   const handleLogout = () => {
-    logout();
-    navigate("/login");
+    logout();          // 1. Cierra sesión
+    navigate("/login") // 2. Envía a login
   };
 
   return (
     <Navbar expand="lg" className="header">
       <Container>
+
+        {/* LOGO + NOMBRE */}
         <Navbar.Brand
-          as={Link}
-          to="/"
           className="header-brand"
+          onClick={() => navigate("/")}
         >
-          <img src={logo} alt="EduFinanzas" className="header-logo" />
+          <img
+            src={logo}
+            alt="EduFinanzas"
+            className="header-logo"
+          />
           EduFinanzas
         </Navbar.Brand>
 
         <Navbar.Toggle />
 
         <Navbar.Collapse className="justify-content-end">
+
           <Nav className="header-nav">
 
+            {/* MONEDAS */}
             <span className="header-monedas">
               💰 {monedas} monedas
             </span>
 
+            {/* NOMBRE DEL USUARIO */}
             {usuario && (
               <span className="header-usuario">
-                Hola, {usuario.nombre}
+                Hola, {usuario.nombre_perfil}
               </span>
             )}
 
-            <Nav.Link as={Link} to="/" className="header-link">
+            {/* NAVEGACIÓN */}
+            <Nav.Link
+              onClick={() => navigate("/")}
+              className="header-link"
+            >
               Inicio
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/perfil" className="header-link">
+            <Nav.Link
+              onClick={() => navigate("/perfil")}
+              className="header-link"
+            >
               Mi Perfil
             </Nav.Link>
 
-            <Nav.Link className="header-logout" onClick={handleLogout}>
+            {/* LOGOUT */}
+            <Nav.Link
+              onClick={handleLogout}
+              className="header-logout"
+            >
               Cerrar sesión
             </Nav.Link>
 
           </Nav>
         </Navbar.Collapse>
+
       </Container>
     </Navbar>
   );

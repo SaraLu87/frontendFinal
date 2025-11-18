@@ -1,203 +1,143 @@
-/* src/pages/temas/temas.css */
+/* ----------------------------------------
+   TemaLayout — estilos modernos
+   Paleta de EduFinanzas
+----------------------------------------- */
 
-/* ------------------------------------ */
-/* Contenedor general del layout     */
-/* ------------------------------------ */
-.tema-layout-container {
+.contenedor-layout {
+  padding: 40px 20px;
   text-align: center;
-  padding: 50px 0;
 }
 
-/* ------------------------------------ */
-/* Título del tema                   */
-/* ------------------------------------ */
-.tema-title {
-  font-size: 2.4rem;
+.titulo-tema {
+  font-size: 2.2rem;
   font-weight: 800;
-  color: #1C3A63; /* Azul oscuro */
-  margin-bottom: 10px;
+  color: #1d4ed8; /* Azul EduFinanzas */
+  margin-bottom: 15px;
 }
 
-/* ------------------------------------ */
-/* Subtítulo                         */
-/* ------------------------------------ */
-.tema-subtitle {
-  color: #64748b;
-  font-size: 1.1rem;
-  margin-bottom: 35px;
+.tema-descripcion {
+  font-size: 1.2rem;
+  color: #475569;
+  margin: 0 auto 40px auto;
+  max-width: 750px;
+  padding: 15px 25px;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
 
-/* ------------------------------------ */
-/* Contenedor de los tres círculos   */
-/* ------------------------------------ */
-.tema-circulos-container {
+.contenedor-circulos {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 25px;
 }
 
-/* ------------------------------------ */
-/* Círculo del reto (GENERAL)        */
-/* ------------------------------------ */
-.circulo-reto {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 700;
+.cargando-texto,
+.error-texto {
   text-align: center;
-  cursor: pointer;
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-/* Hover efecto */
-.circulo-reto:hover {
-  transform: scale(1.08);
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+/* ---------------------------------------------------------
+   TEMA COMPLETADO
+--------------------------------------------------------- */
+
+.tema-completado-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-/* ------------------------------------ */
-/* Colores (según tema EduFinanzas)  */
-/* ------------------------------------ */
-
-/* Azul */
-.circulo-azul {
-  background-color: #2F7AD9;
-}
-
-/* Verde */
-.circulo-verde {
-  background-color: #3EBE62;
-}
-
-/* Morado */
-.circulo-morado {
-  background-color: #8A4FFF;
-}
-
-/* Amarillo */
-.circulo-amarillo {
-  background-color: #F7C948;
-}
-
-/* ------------------------------------ */
-/* Responsive                        */
-/* ------------------------------------ */
-
-@media (max-width: 768px) {
-  .circulo-reto {
-    width: 140px;
-    height: 140px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .circulo-reto {
-    width: 120px;
-    height: 120px;
-    font-size: 0.9rem;
-    padding: 15px;
-  }
-}
-
-
-/* _________________*/
-
-
-/* ----------- TEMA BLOQUEADO ----------- */
-
-.tema-bloqueado-card {
+.tema-completado-card {
   background: #ffffff;
   padding: 35px;
-  border-radius: 18px;
+  border-radius: 25px;
+  max-width: 650px;
+  width: 100%;
   text-align: center;
-  max-width: 500px;
-  margin: 0 auto 40px auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-top: 12px solid #2F7AD9;
 }
 
-.tema-bloqueado-card h3 {
-  color: #d9534f;
+.titulo-completado {
+  font-size: 2rem;
+  color: #2F7AD9;
   font-weight: 800;
 }
 
-.btn-comprar {
+.mensaje-completado {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #475569;
+}
+
+.recompensa-box {
+  margin: 25px 0;
+  font-size: 1.5rem;
+  background: #e8f5ff;
+  padding: 15px;
+  border-radius: 18px;
+  border: 2px solid #2F7AD9;
+  font-weight: bold;
+  color: #14539b;
+}
+
+/* Animación moneda */
+.animate-coin {
+  animation: coinJump 1s ease-in-out forwards;
+}
+
+@keyframes coinJump {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.botones-final {
   margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  background: #52E36A;
-  color: white;
-  border-radius: 10px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-comprar:hover {
-  background: #3cc453;
-}
-
-.btn-volver-inicio {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  background: #2F7AD9;
-  color: white;
-  border-radius: 10px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-volver-inicio:hover {
-  background: #1c4d8c;
-}
-
-.pregunta-card {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 25px;
-}
-
-.opciones-lista {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 15px;
 }
 
-.opcion-btn {
+/* Botón volver */
+.btn-volver {
   background: #e2e8f0;
   border: none;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.opcion-btn:hover {
-  background: #cbd5e1;
-}
-
-.opcion-btn.seleccionada {
-  background: #52E36A;
-  color: white;
   font-weight: bold;
 }
 
+.btn-volver:hover {
+  background: #cbd5e1;
+}
 
+/* Botón siguiente */
+.btn-siguiente {
+  background: #2F7AD9;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+.btn-siguiente:hover {
+  background: #1d5faf;
+}
 
+.mensaje-final-completo {
+  margin-top: 15px;
+  color: #16a34a;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
